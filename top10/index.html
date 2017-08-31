@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <link rel="stylesheet" type="text/css" href="./iconfont.css">
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:453px;width: 1003px"></div>
+
+
+<!-- ECharts单文件引入 -->
+<!--<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+     var myChart = echarts.init(document.getElementById("main"));
+    var option = {
+    color: ['rgb(155,60,196)', 'rgb(0,153,255)', 'rgb(23,193,197)','rgb(238,204,68)', 'rgb(26,197,117)', 'rgb(111,89,255)','rgb(89,214,255)',],
+    grid: {
+        left: 250
+    },
+    legend: {
+            top:'30%',
+            right: 10,
+            orient:'vertical',
+            data: ['聊天','上网','微博','炒股','游戏','视频','购物']
+        },
+    //         tooltip: {
+    //     trigger: 'axis',
+    //     showContent: false,
+    //     axisPointer: {
+    //         type: 'shadow'
+    //     }
+    // },
+    xAxis: {
+        splitLine: {show: false},
+        axisLabel: {show: false},
+        axisTick: {show: false},
+        axisLine: {show: false},
+        // axisLine: {
+        //     show:false,
+        //     lineStyle: {color: '#fff'}
+        // },
+        // axisLabel: {
+        //     show:false,
+        //   //  fontSize:24,
+        //     textStyle: {color: '#777'}
+        // }
+    },
+    yAxis: [{
+        inverse: true,
+        // alignWithLabel: true,//类目轴中在 boundaryGap 为 true 的时候有效，可以保证刻度线和标签对齐
+       splitLine: {show: false},
+        axisLabel: {show: false},
+        axisTick: {show: false},
+        axisLine: {show: false},
+
+        // splitLine: {
+        //     show:false,
+        // },
+        // axisTick: {//坐标轴刻度相关设置。
+        //     length: 100,
+        //     // lineStyle: {color: '#ccc'}          
+        // },
+        // axisLine: {
+        //     show:false,
+        //     lineStyle: {color: '#fff'}
+        // },
+        // name: '                     访问应用类型时长分布',
+        data: ['-', '-', '-', '-', '-', '-', '-', '-', '-', '-']      
+    }, {
+        name: '                     怠工时长',
+        nameLocation: 'start',      
+        nameTextStyle: {
+            fontWeight: 'bold'
+        },
+        position: 'left',
+        offset: 100,
+        axisLine: {
+            onZero: false,
+            show: false          
+        },
+        axisTick: {
+            length: 150,
+            inside: true,
+            lineStyle: {color: '#fff'}
+        },      
+        axisLabel: {
+            inside: true
+        },      
+        inverse: true,    
+        data:['22h 28min', '18h 41min', '17h 40min', '14h 45min', '13h 43min','9h 14min', '9h 10min', '8h 0min', '7h 31min', '6h06min'],
+    }, 
+     {
+        name: '                     用户',
+        nameLocation: 'start',      
+        nameTextStyle: {
+            fontWeight: 'bold'
+        },
+        position: 'left',
+        offset: 180,
+        axisLine: {
+            onZero: false,
+            show: false          
+        },
+        axisTick: {
+            length: 100,
+            inside: true,
+            lineStyle: {color: '#fff'}
+        },      
+        axisLabel: {
+            inside: true
+        },      
+        inverse: true,    
+        data:[{value:'邵远',textStyle: {color: 'rgb(155,60,196)'}}, '沈远', '孟晓慧', '乔云慧', '冯志','邵远', '石月', '孟晓慧', '乔云慧', '冯志'],
+    }, {
+        name: '                排名',
+        nameLocation: 'start',
+        nameTextStyle: {
+            fontWeight: 'bold'
+        },     
+        position: 'left',
+        offset: 220,
+        axisLine: {
+            onZero: false,
+            show: false
+        },
+        axisTick: {
+            length: 100,
+            inside: true,
+            lineStyle: { color: '#fff'}          
+        },
+        axisLabel: {
+            inside: true
+        },
+        inverse: true, 
+        data: [1,2,3,4,5,6,7,8,9,10]      
+    }],
+    series: [{
+        name:'聊天',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[5,5,5,5,5,5,5,5,5,5],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '聊天',              
+            }
+        }
+    }, {
+        name:'上网',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[5,4,5,4,5,4,5,4,5,4],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '上网',              
+            }
+        }      
+    }, {
+         name:'微博',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[3,4,3,4,3,4,3,4,3,4],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '微博',              
+            }
+        }      
+    },
+     {
+         name:'炒股',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[3,2,2,3,2,3,3,2,2,3],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '炒股',              
+            }
+        }      
+    },
+     {
+         name:'游戏',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[2,3,2,3,2,3,2,3,2,3],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '游戏',              
+            }
+        }      
+    },
+     {
+         name:'视频',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[1,2,1,2,2,1,1,1,1,1],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '视频',              
+            }
+        }      
+    },
+     {
+         name:'购物',
+        type: 'bar',
+        barWidth: '70%',
+        stack: '因素分析',
+        data:[1,2,1,1,1,1,1,1,1,1],
+        label: {
+            normal: {
+                show: true,
+                position: 'insideLeft',
+                textStyle: {color: '#FFF'},
+                formatter: '购物',              
+            }
+        }      
+    }
+    // , {      
+    //     type: 'bar',
+    //     data:['-', '-', '-', '-', '-'],
+    //     yAxisIndex: 1
+    // }, {
+    //     type: 'bar',
+    //     data:['-', '-', '-', '-', '-'],
+    //     yAxisIndex: 2
+    // }
+    ]
+};
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+
+</script>
+</body>
+</html>

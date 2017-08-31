@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <link rel="stylesheet" type="text/css" href="./iconfont.css">
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="height:453px;width: 1003px"></div>
+<i class="icon iconfont icon-db-relations">hello</i>
+
+
+<!-- ECharts单文件引入 -->
+<!--<script src="http://echarts.baidu.com/build/dist/echarts-all.js"></script>-->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/echarts.min.js"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts图表
+    var myChart = echarts.init(document.getElementById("main"));
+    var data = [
+        [['06:00-07:00', 27], ['07:00-08:00', 37], ['08:00-09:00', 57], ['09:00-10:00', 57], ['10:00-11:00', 17]]
+    ];
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn:'click',
+            formatter: function (params) {
+            	var result='时段： '+params.data[0]+'\n';
+                return result;
+                // if(typeof(params.value)[2] == "undefined"){
+                // return params.name + ' : ' + params.value;
+                // }else{
+                // return params.name + ' : ' + params.value[2];
+                // }
+            },
+           backgroundColor:'red',
+           borderColor: 'black',  
+            shadowStyle : {                       // 阴影指示器样式设置
+                width: 'auto',                   // 阴影大小
+                color: 'rgba(150,150,150,0.3)'  // 阴影颜色
+            },
+            textStyle: {
+            color: '#000'
+        	},
+
+        },
+        legend: {
+            right: 10,
+            data: ['怠工人数过多，需要关注', '2015']
+        },
+        xAxis: {
+            type: 'category',
+            data: ['06:00-07:00', '07:00-08:00', '08:00-09:00', '09:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00'],
+            show: true,
+            splitLine: {
+                lineStyle: {
+                    type: 'solid'
+                }
+            }
+        },
+        yAxis: {
+            // type : 'value',
+            // data:[11, 11, 15, 13, 12, 13, 10],
+            splitLine: {
+                lineStyle: {
+                    type: 'solid'
+                }
+            },
+            scale: true
+        },
+        series: [{
+            name: '怠工人数过多，需要关注',
+            data: data[0],
+            type: 'scatter',
+            symbolSize: function (data) {
+                return data[1] * 2;
+            },
+
+
+            label: {
+                normal: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[0] + '\n' + param.data[1]+'人';
+                    },
+                    position: 'inside',
+                    textStyle: {
+                        color: 'white'
+                    }
+                }
+            },
+            itemStyle: {
+                normal: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(120, 36, 50, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(251, 118, 123)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(204, 46, 72)'
+                    }])
+                }
+
+            }
+        }
+            // , {
+            //     name: '正常',
+            //     data: data[1],
+            //     type: 'scatter',
+            //     symbolSize: function (data) {
+            //         return Math.sqrt(data[2]) / 5e2;
+            //     },
+            //     label: {
+            //         normal: {
+            //             show: true,
+            //             formatter: function (param) {
+            //                 return param.data[1]+'人';
+            //             },
+            //             position: 'inside',
+            //             textStyle:{
+            //             	color:'white'
+            //             }
+            //         }
+            //     },
+            //     itemStyle: {
+            //         normal: {
+            //             shadowBlur: 10,
+            //             shadowColor: 'rgba(25, 100, 150, 0.5)',
+            //             shadowOffsetY: 5,
+            //             color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+            //                 offset: 0,
+            //                 color: 'rgb(129, 227, 238)'
+            //             }, {
+            //                 offset: 1,
+            //                 color: 'rgb(25, 183, 207)'
+            //             }])
+            //         }
+            //     }
+            // }
+        ]
+    };
+
+    // 为echarts对象加载数据
+    myChart.setOption(option);
+    //  myChart.on('mouseover', function (params) {
+    //             debugger
+    //             // me.fireEvent('showdetail', params);
+    // });
+    //   myChart.on('mouseout', function (params) {
+    //             debugger
+    //             // me.fireEvent('showdetail', params);
+    // });
+
+</script>
+</body>
+</html>
